@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0f1e" />
+  <meta name="description" content="Your YLearn PRO payment was successful. Learn how to access PRO and contact support if needed." />
+  <title>Payment Successful</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0f1e;
+      --panel: rgba(255, 255, 255, 0.055);
+      --panel-soft: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 255, 255, 0.105);
+      --text: #f8fafc;
+      --muted: #aab4c5;
+      --green: #22c55e;
+      --blue: #6c8cff;
+      --whatsapp: #25d366;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-height: 100%; background: var(--bg); }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      padding: max(18px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 8% 5%, rgba(34, 197, 94, 0.12), transparent 34%),
+        radial-gradient(ellipse at 95% 92%, rgba(93, 121, 255, 0.13), transparent 38%),
+        linear-gradient(135deg, #0a0f1e 0%, #0f1526 52%, #0a0f20 100%);
+    }
+
+    .ambient {
+      position: fixed;
+      z-index: 0;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(2px);
+      opacity: .7;
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+    .ambient-one { top: -145px; left: -100px; background: radial-gradient(circle, rgba(34,197,94,.19), transparent 70%); }
+    .ambient-two { right: -130px; bottom: -155px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(108,140,255,.20), transparent 70%); animation-delay: -3s; }
+
+    .page { position: relative; z-index: 1; width: 100%; max-width: 520px; margin: auto; }
+
+    .card {
+      width: 100%;
+      padding: 30px 24px 24px;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: linear-gradient(160deg, rgba(255,255,255,.065), rgba(255,255,255,.035));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255,255,255,.035);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      animation: rise-in .6s cubic-bezier(.2,.75,.25,1) both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 auto 22px;
+      color: #e7ecf6;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .brand-mark {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid rgba(34,197,94,.4);
+      border-radius: 9px;
+      color: var(--green);
+      background: rgba(34,197,94,.10);
+    }
+
+    .hero { text-align: center; }
+    .success-icon {
+      position: relative;
+      display: grid;
+      width: 104px;
+      height: 104px;
+      place-items: center;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,197,94,.20) 0%, rgba(34,197,94,.075) 54%, transparent 72%);
+      animation: glow 2.2s ease-in-out infinite;
+    }
+    .success-icon::before {
+      position: absolute;
+      inset: 12px;
+      border: 1.8px solid rgba(34,197,94,.9);
+      border-radius: 50%;
+      background: rgba(34,197,94,.11);
+      box-shadow: 0 0 28px rgba(34,197,94,.18);
+      content: "";
+    }
+    .success-icon svg { position: relative; width: 46px; height: 46px; color: var(--green); }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 6vw, 32px);
+      line-height: 1.18;
+      letter-spacing: -.045em;
+      font-weight: 780;
+    }
+    .welcome {
+      margin: 11px 0 0;
+      color: var(--green);
+      font-size: clamp(17px, 4.4vw, 19px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .subtitle {
+      max-width: 370px;
+      margin: 13px auto 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .steps { display: grid; gap: 12px; margin-top: 27px; text-align: left; }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,.075);
+      border-radius: 16px;
+      background: var(--panel-soft);
+    }
+    .step-icon {
+      display: grid;
+      flex: 0 0 40px;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--green);
+      background: rgba(34,197,94,.12);
+    }
+    .step-icon.blue { color: #91a7ff; background: rgba(108,140,255,.13); }
+    .step-icon svg { width: 21px; height: 21px; }
+    .step-copy { min-width: 0; padding-top: 1px; }
+    .step-title { margin: 0; color: #f6f8fc; font-size: 14px; line-height: 1.4; font-weight: 700; }
+    .step-description { margin: 4px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    .support-note {
+      margin-top: 17px;
+      padding: 13px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid rgba(250, 204, 21, .22);
+      border-radius: 14px;
+      background: rgba(250, 204, 21, .055);
+      color: #d8deea;
+      font-size: 13px;
+      line-height: 1.55;
+      text-align: left;
+    }
+    .support-note svg { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 1px; color: #facc15; }
+    .support-note strong { color: #fff2b2; }
+
+    .support-heading { margin: 21px 0 12px; color: #d7deeb; font-size: 13px; font-weight: 600; text-align: center; }
+    .whatsapp-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 14px;
+      color: #052e1a;
+      background: linear-gradient(135deg, #45e783, #25d366 55%, #1dbb5b);
+      box-shadow: 0 8px 22px rgba(37,211,102,.18);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 780;
+      text-decoration: none;
+      text-align: center;
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .whatsapp-button svg { flex: 0 0 22px; width: 22px; height: 22px; }
+    .whatsapp-button:hover { filter: brightness(1.04); box-shadow: 0 10px 28px rgba(37,211,102,.25); }
+    .whatsapp-button:active { transform: scale(.985); }
+    .whatsapp-button:focus-visible { outline: 3px solid rgba(255,255,255,.85); outline-offset: 3px; }
+
+    .footer {
+      margin: 21px 0 0;
+      padding-top: 19px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      color: #7f8aa0;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .footer span { color: #aeb9cc; }
+
+    @keyframes glow {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(34,197,94,0)); }
+      50% { transform: scale(1.035); filter: drop-shadow(0 0 12px rgba(34,197,94,.12)); }
+    }
+    @keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(14px,18px,0); } }
+
+    @media (min-width: 600px) {
+      body { padding: 28px 22px; }
+      .card { padding: 34px 36px 26px; }
+      .steps { margin-top: 30px; }
+    }
+    @media (max-width: 360px) {
+      body { padding-left: 11px; padding-right: 11px; }
+      .card { padding: 25px 16px 20px; border-radius: 22px; }
+      .success-icon { width: 92px; height: 92px; margin-bottom: 18px; }
+      .step { padding: 13px 12px; gap: 11px; }
+      .step-icon { flex-basis: 36px; width: 36px; height: 36px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <main class="page">
+    <section class="card" aria-labelledby="page-title">
+      <div class="hero">
+        <div class="brand" aria-label="YLearn">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5c2.8-.8 5.5-.3 8 1.5v12c-2.5-1.8-5.2-2.3-8-1.5z"/><path d="M20 5.5c-2.8-.8-5.5-.3-8 1.5v12c2.5-1.8 5.2-2.3 8-1.5z"/></svg>
+          </span>
+          YLEARN
+        </div>
+
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="m13 24.5 7.2 7.1L35.5 16" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <h1 id="page-title">Payment Successful!</h1>
+        <p class="welcome">Welcome to YLearn PRO 🎉</p>
+        <p class="subtitle">Thank you for your purchase! We're getting your PRO access ready. Follow the steps below to start learning.</p>
+      </div>
+
+      <div class="steps" aria-label="How to access YLearn PRO">
+        <div class="step">
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+          </div>
+          <div class="step-copy">
+            <p class="step-title">Step 1: Close the YLearn App</p>
+            <p class="step-description">Close the app completely, so it can refresh your subscription status.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon blue" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M5.6 9A7 7 0 0 1 17.3 6.7L20 12M4 12l2.7 5.3A7 7 0 0 0 18.4 15"/></svg>
+          </div>
+          <div class="step-copy">
+            <p class="step-title">Step 2: Open YLearn again</p>
+            <p class="step-description">Your YLearn PRO access should appear once your subscription status is updated.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="support-note" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        <div><strong>PRO access not granted within 5 minutes?</strong> Please WhatsApp the YLearn support team using the button below. We'll help you resolve it.</div>
+      </div>
+
+      <p class="support-heading">Need help with your PRO access?</p>
+      <a class="whatsapp-button" id="whatsapp-support" href="https://wa.me/918850351842" target="_blank" rel="noopener noreferrer" aria-label="Contact YLearn support on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.82 11.82 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.1.55 4.16 1.6 5.98L.12 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.45h.01c6.55 0 11.88-5.33 11.89-11.88a11.8 11.8 0 0 0-3.48-8.44ZM12.1 21.78h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.85 9.85 0 0 1-1.52-5.27C2.19 6.54 6.64 2.1 12.1 2.1a9.76 9.76 0 0 1 6.96 2.89 9.76 9.76 0 0 1 2.88 6.95c0 5.46-4.44 9.9-9.9 9.9Zm5.43-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.62.72.23 1.37.2 1.88.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+        Contact Support on WhatsApp
+      </a>
+
+      <p class="footer">Thank you for choosing <span>YLearn PRO</span>.<br />Keep learning. Keep growing. 📚</p>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const supportButton = document.getElementById('whatsapp-support');
+      const supportMessage = 'Hi YLearn Team, I completed my YLearn PRO payment but my PRO access has not been granted even after 5 minutes. Please help me activate my subscription.';
+      supportButton.href = 'https://wa.me/918850351842?text=' + encodeURIComponent(supportMessage);
+    })();
+  </script>
+</body>
+</html>
